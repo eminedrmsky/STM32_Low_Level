@@ -67,6 +67,12 @@ typedef struct
 
 }GPIO_TYPE;
 
+typedef enum{
+    RISING_EDGE,
+    FALLING_EDGE,
+    RISING_FALLING_EDGE
+}edge_select;
+
 //FUNCTION PROTOTYPES
 //******************************************************************************************
 //GPIO CONFIGIRATION
@@ -74,8 +80,14 @@ typedef struct
 void config_pin_output(GPIO_TypeDef *port, uint32_t , uint32_t , uint32_t , uint32_t );
 void config_pin_input(GPIO_TypeDef *port, uint32_t ,uint32_t, uint32_t );
 
+//GPIO PIN FUNCTION
 void gpio_write(GPIO_TypeDef *port, uint32_t pinNumber, uint32_t pinState);
 void gpio_toggle(GPIO_TypeDef *port, uint32_t pinNumber);
 void gpio_init(GPIO_TYPE gpio_type);
+
+//GPIO INTERRUPT
+void config_gpio_interrupt(GPIO_TypeDef *port, uint32_t pinNumber, edge_select edge);
+void enable_gpio_interrupt(uint32_t pinNumber, IRQn_Type irqNumber);
+void clear_gpio_interrupt(uint32_t pinNumber);
 
 #endif // _MY_HAL_GPIO
