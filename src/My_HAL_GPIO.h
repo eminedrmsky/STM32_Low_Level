@@ -53,6 +53,19 @@
 #define POS_BIT2(x)        ((x*2)+1) 
 #define POS_BIT3(x)        (x+16)
 
+//Input Data
+
+#define IDRA      (GPIOA->IDR)
+#define IDRB      (GPIOB->IDR)
+#define IDRC      (GPIOC->IDR)
+#define IDRD      (GPIOD->IDR)
+
+
+// Timers Configuration
+
+
+
+
 //CONFIGURATION STRUCTURE
 
 typedef struct 
