@@ -116,6 +116,9 @@ typedef enum{
 #define UP_COUNTER             0
 #define DOWN_COUNTER           1
 
+#define PWM_MODE_1          ((uint32_t)  0x06)
+#define PWM_MODE_2          ((uint32_t)  0x07)
+
 
 
 
@@ -143,6 +146,7 @@ void clear_gpio_interrupt(uint32_t pinNumber);
 void config_timer(TIM_TypeDef *port, uint16_t prescaler, uint16_t auto_reload);
 void timer_init(TIM_TypeDef *port, uint32_t division, uint32_t buffer, uint32_t edge_align, uint32_t direction);
 void timer_enable(TIM_TypeDef *port);
+void config_timer_PWM_clock(TIM_TypeDef *port, uint16_t duty_cycle, uint32_t pwm_mode);
 
 //Timer interrupts
 
