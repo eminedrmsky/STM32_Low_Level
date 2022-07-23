@@ -67,6 +67,9 @@ void config_pin_input(GPIO_TypeDef *port, uint32_t pinNumber,uint32_t mode_type,
                 case ALT_FUNC_MODE:
                     port ->MODER |= (1<<(POS_BIT2(pinNumber) )) ;
                     port ->MODER &= ~ (1<<POS_BIT1(pinNumber)) ;
+                    if (pinNumber<=7){
+
+                    }
                 break;
 
                 case ANALOG_MODE:
@@ -358,5 +361,25 @@ void enable_timer_interrupt(TIM_TypeDef *port, IRQn_Type irqNumber){
 
 void clear_timer_interrupt(TIM_TypeDef *port){
     port -> SR &= ~ (1<<0 );
+
+}
+
+
+void config_timer_PWM_clock(TIM_TypeDef *port, uint16_t duty_cycle, uint32_t pwm_mode){
+
+    port ->CCR1 = duty_cycle;
+    switch(pwm_mode){
+        case PWM_MODE_1:
+                    port ->CCMR1 |= (1<<6) | (1<<5) ;
+                    port ->CCMR1 &= ~ (1<<4) ;
+        break;
+        case PWM_MODE_2:
+                    port ->CCMR1 |= (1<<6) | (1<<5) |(1<<4) ;
+        break;        
+    }
+
+    port ->CCMR1 |= (1<<3)  ;  //enable preload register for CCR1
+    port -> CCER |= (1<<0);  // enable output
+    port ->EGR |= (1<<0); //event generation enabled
 
 }
